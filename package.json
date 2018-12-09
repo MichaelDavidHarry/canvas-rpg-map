@@ -1,0 +1,27 @@
+{
+  "name": "canvas-rpg-map",
+  "version": "0.0.1",
+  "description": "A simple tile-based HTML5 canvas map.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "build-watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelDavidHarry/canvas-rpg-map.git"
+  },
+  "author": "Michael Harry",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MichaelDavidHarry/canvas-rpg-map/issues"
+  },
+  "homepage": "https://github.com/MichaelDavidHarry/canvas-rpg-map#readme",
+  "devDependencies": {
+    "ts-loader": "^5.3.1",
+    "typescript": "^3.2.2",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2"
+  }
+}
