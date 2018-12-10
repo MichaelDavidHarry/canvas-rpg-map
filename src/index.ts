@@ -3,8 +3,8 @@ import CanvasMapConfiguration from "./CanvasMapConfiguration";
 import Direction from "./Direction";
 
 var canvas = document.getElementById("map-canvas") as HTMLCanvasElement
-canvas.width = 320
-canvas.height = 320
+canvas.width = 352
+canvas.height = 352
 if(canvas === null){
     throw new Error("Cannot get canvas")
 }
@@ -16,16 +16,33 @@ map.startRendering()
 window.addEventListener("keydown", (e) => {
     switch(e.code){
         case "ArrowDown":
-            map.moveMap(Direction.Up);
+            map.moveCharacter(Direction.Down);
         break;
         case "ArrowUp":
-            map.moveMap(Direction.Down);
+            map.moveCharacter(Direction.Up);
         break;
         case "ArrowLeft":
-        map.moveMap(Direction.Right);
+        map.moveCharacter(Direction.Left);
         break;
         case "ArrowRight":
-        map.moveMap(Direction.Left);
+        map.moveCharacter(Direction.Right);
         break;
     }
+    updatePosition()
 })
+
+var updatePosition = () => {
+    var xPosition = document.getElementById("x-position")
+    var yPosition = document.getElementById("y-position")
+    var position = map.mapPosition
+    if(xPosition === null){
+        throw new Error("Cannot get x-position")
+    }
+    xPosition.innerText = position.x.toString()
+    if(yPosition === null){
+        throw new Error("Cannot get y-position")
+    }
+    yPosition.innerHTML = position.y.toString()
+}
+
+updatePosition()
