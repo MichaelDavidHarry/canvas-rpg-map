@@ -44,5 +44,9 @@ var updatePosition = () => {
     }
     yPosition.innerHTML = position.y.toString()
 }
-
 updatePosition()
+
+canvas.addEventListener("map-click", (e) => {
+    var customEvent = e as CustomEvent;
+    alert(JSON.stringify(customEvent.detail))
+})

@@ -9,6 +9,7 @@ export default class CanvasMap{
             throw new Error("Could not get canvas context")
         }
         this.context = context
+        this.registerCanvasMapClickEvent()
     }
 
     moveCharacter(direction: Direction) {
@@ -61,7 +62,11 @@ export default class CanvasMap{
         }
     }
 
-    public async startRendering(){
+    get mapPosition() : MapPosition{
+        return new MapPosition(this.xPosition, this.yPosition)
+    }
+
+    async startRendering(){
         var that = this
         this.backgroundTileImageElement = await this.loadImageAsset(this.configuration.backgroundTileImageUrl)
         
@@ -121,8 +126,20 @@ export default class CanvasMap{
         return loadPromise
     }
 
-    get mapPosition() : MapPosition{
-        return new MapPosition(this.xPosition, this.yPosition)
+    private registerCanvasMapClickEvent(){
+        this.canvas.addEventListener("click", (e) => {
+            var center = this.canvas.width / 2
+            var xOffset = (e.offsetX - center) / this.configuration.tileSize
+            var yOffset = (center - e.offsetY) / this.configuration.tileSize
+            var position = new MapPosition(Math.round(this.xPosition + xOffset), Math.round(this.yPosition + yOffset))
+            
+            var clickEvent = new CustomEvent("map-click", {
+                detail: {
+                    clickedPositon: position
+                }
+            })
+            this.canvas.dispatchEvent(clickEvent)
+        })
     }
 
     private context: CanvasRenderingContext2D
